@@ -45,6 +45,16 @@ function HomeComponent() {
             Станции
           </Link>
         </li>
+        <li>
+          <Link to="/currentWeather" className="text-blue-500 hover:opacity-75">
+            Текущая погода
+          </Link>
+        </li>
+        {/* <li>
+          <Link to="/avgTemperature" className="text-blue-500 hover:opacity-75">
+            Среднесуточная температура
+          </Link>
+        </li> */}
       </ol>
     </div>
   )

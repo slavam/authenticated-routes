@@ -62,6 +62,22 @@ function AuthLayout() {
           </Link>
         </li>
         <li>
+          <Link
+            to="/currentWeather"
+            className="hover:underline data-[status='active']:font-semibold"
+          >
+            Текущая погода
+          </Link>
+        </li>
+        {/* <li>
+          <Link
+            to="/avgTemperature"
+            className="hover:underline data-[status='active']:font-semibold"
+          >
+            Среднесуточная температура
+          </Link>
+        </li> */}
+        <li>
           <button
             type="button"
             className="hover:underline"

@@ -12,9 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as AuthCurrentWeatherRouteImport } from './routes/_auth.currentWeather'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthStationsRouteImport } from './routes/_auth.stations'
+import { Route as AuthAvgTemperatureIndexRouteImport } from './routes/_auth.avgTemperature.index'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
 import { Route as AuthInvoicesInvoiceIdRouteImport } from './routes/_auth.invoices.$invoiceId'
 import { Route as AuthStationsIndexRouteImport } from './routes/_auth.stations.index'
@@ -33,6 +35,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthCurrentWeatherRoute = AuthCurrentWeatherRouteImport.update({
+  id: '/currentWeather',
+  path: '/currentWeather',
+  getParentRoute: () => AuthRoute,
+} as any)
 const AuthDashboardRoute = AuthDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -46,6 +53,11 @@ const AuthInvoicesRoute = AuthInvoicesRouteImport.update({
 const AuthStationsRoute = AuthStationsRouteImport.update({
   id: '/stations',
   path: '/stations',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthAvgTemperatureIndexRoute = AuthAvgTemperatureIndexRouteImport.update({
+  id: '/avgTemperature/',
+  path: '/avgTemperature/',
   getParentRoute: () => AuthRoute,
 } as any)
 const AuthInvoicesIndexRoute = AuthInvoicesIndexRouteImport.update({
@@ -67,18 +79,22 @@ const AuthStationsIndexRoute = AuthStationsIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/currentWeather': typeof AuthCurrentWeatherRoute
   '/dashboard': typeof AuthDashboardRoute
   '/invoices': typeof AuthInvoicesRouteWithChildren
   '/stations': typeof AuthStationsRouteWithChildren
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
+  '/avgTemperature/': typeof AuthAvgTemperatureIndexRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
   '/stations/': typeof AuthStationsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/currentWeather': typeof AuthCurrentWeatherRoute
   '/dashboard': typeof AuthDashboardRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
+  '/avgTemperature': typeof AuthAvgTemperatureIndexRoute
   '/invoices': typeof AuthInvoicesIndexRoute
   '/stations': typeof AuthStationsIndexRoute
 }
@@ -87,10 +103,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/login': typeof LoginRoute
+  '/_auth/currentWeather': typeof AuthCurrentWeatherRoute
   '/_auth/dashboard': typeof AuthDashboardRoute
   '/_auth/invoices': typeof AuthInvoicesRouteWithChildren
   '/_auth/stations': typeof AuthStationsRouteWithChildren
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
+  '/_auth/avgTemperature/': typeof AuthAvgTemperatureIndexRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
   '/_auth/stations/': typeof AuthStationsIndexRoute
 }
@@ -99,18 +117,22 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/login'
+    | '/currentWeather'
     | '/dashboard'
     | '/invoices'
     | '/stations'
     | '/invoices/$invoiceId'
+    | '/avgTemperature/'
     | '/invoices/'
     | '/stations/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
+    | '/currentWeather'
     | '/dashboard'
     | '/invoices/$invoiceId'
+    | '/avgTemperature'
     | '/invoices'
     | '/stations'
   id:
@@ -118,10 +140,12 @@ export interface FileRouteTypes {
     | '/'
     | '/_auth'
     | '/login'
+    | '/_auth/currentWeather'
     | '/_auth/dashboard'
     | '/_auth/invoices'
     | '/_auth/stations'
     | '/_auth/invoices/$invoiceId'
+    | '/_auth/avgTemperature/'
     | '/_auth/invoices/'
     | '/_auth/stations/'
   fileRoutesById: FileRoutesById
@@ -155,6 +179,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_auth/currentWeather': {
+      id: '/_auth/currentWeather'
+      path: '/currentWeather'
+      fullPath: '/currentWeather'
+      preLoaderRoute: typeof AuthCurrentWeatherRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/_auth/dashboard': {
       id: '/_auth/dashboard'
       path: '/dashboard'
@@ -174,6 +205,13 @@ declare module '@tanstack/react-router' {
       path: '/stations'
       fullPath: '/stations'
       preLoaderRoute: typeof AuthStationsRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_auth/avgTemperature/': {
+      id: '/_auth/avgTemperature/'
+      path: '/avgTemperature'
+      fullPath: '/avgTemperature/'
+      preLoaderRoute: typeof AuthAvgTemperatureIndexRouteImport
       parentRoute: typeof AuthRoute
     }
     '/_auth/invoices/': {
@@ -227,15 +265,19 @@ const AuthStationsRouteWithChildren = AuthStationsRoute._addFileChildren(
 )
 
 interface AuthRouteChildren {
+  AuthCurrentWeatherRoute: typeof AuthCurrentWeatherRoute
   AuthDashboardRoute: typeof AuthDashboardRoute
   AuthInvoicesRoute: typeof AuthInvoicesRouteWithChildren
   AuthStationsRoute: typeof AuthStationsRouteWithChildren
+  AuthAvgTemperatureIndexRoute: typeof AuthAvgTemperatureIndexRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
+  AuthCurrentWeatherRoute: AuthCurrentWeatherRoute,
   AuthDashboardRoute: AuthDashboardRoute,
   AuthInvoicesRoute: AuthInvoicesRouteWithChildren,
   AuthStationsRoute: AuthStationsRouteWithChildren,
+  AuthAvgTemperatureIndexRoute: AuthAvgTemperatureIndexRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)

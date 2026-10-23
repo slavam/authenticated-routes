@@ -79,6 +79,17 @@ function LoginComponent() {
               className="border rounded-md p-2 w-full"
               required
             />
+            <label htmlFor="password-input" className="text-sm font-medium">
+              Пароль
+            </label>
+            <input
+              id="password-input"
+              name="password"
+              placeholder="Enter password"
+              type="password"
+              className="border rounded-md p-2 w-full"
+              required
+            />
           </div>
           <button
             type="submit"
