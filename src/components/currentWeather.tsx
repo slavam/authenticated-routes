@@ -1,4 +1,3 @@
-// import { useCurrentWeatherQuery } from '../api/apiSlice'
 import { useCurrentWeatherQuery } from '../queries/currentWeather'
 import { useState } from 'react'
 import Select from 'react-select'
@@ -89,7 +88,6 @@ export const CurrentWeather = () => {
   if (isLoading) {
     content = <Spinner text="Loading..." />
   } else if (isSuccess && observations) {
-    // console.log(JSON.stringify(observations))
     observations.forEach((data) => {
       let measurement = data.meas_hash
       switch (measurement) {
@@ -146,7 +144,6 @@ export const CurrentWeather = () => {
                 id="select-station"
                 isClearable={false}
               />
-              {/* <Select className="mb-3" value={station} onChange={val => setStation(val)} options={meteoStations} id='select-station' /> */}
             </td>
           </tr>
         </thead>
