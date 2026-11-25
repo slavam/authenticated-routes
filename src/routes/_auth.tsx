@@ -63,10 +63,26 @@ function AuthLayout() {
         </li>
         <li>
           <Link
+            to="/measurements"
+            className="hover:underline data-[status='active']:font-semibold"
+          >
+            Измерения
+          </Link>
+        </li>
+        <li>
+          <Link
             to="/currentWeather"
             className="hover:underline data-[status='active']:font-semibold"
           >
             Текущая погода
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/soapRadiation"
+            className="hover:underline data-[status='active']:font-semibold"
+          >
+            Радиация (SOAP)
           </Link>
         </li>
         {/* <li>

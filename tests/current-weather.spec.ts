@@ -72,7 +72,7 @@ test.describe('CurrentWeather Component', () => {
     })
 
     // Перезагружаем страницу, чтобы применился новый мок
-    await page.reload()
+    // await page.reload()
 
     // Проверяем, что отобразился fallback
     page.getByRole('heading', { level: 1, name: 'Данные не найдены' })

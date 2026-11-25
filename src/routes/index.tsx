@@ -46,6 +46,11 @@ function HomeComponent() {
           </Link>
         </li>
         <li>
+          <Link to="/measurements" className="text-blue-500 hover:opacity-75">
+            Измерения
+          </Link>
+        </li>
+        <li>
           <Link to="/currentWeather" className="text-blue-500 hover:opacity-75">
             Текущая погода
           </Link>
